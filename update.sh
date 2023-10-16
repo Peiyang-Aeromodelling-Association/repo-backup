@@ -58,5 +58,5 @@ for submodule_name in $submodule_names; do
 done
 
 # commit and push changes
-git add . && git commit -am"update" && git push origin main
+git add . && git commit -am"update" && GIT_SSH_COMMAND="ssh -i $(load_key repo-backup)" git push origin main
 
