@@ -1,0 +1,18 @@
+[submodule "ros-px4-simulation"]
+	path = ros-px4-simulation
+	url = git@github.com:Peiyang-Aeromodelling-Association/ros-px4-simulation.git
+[submodule "nuaa_ros_code"]
+	path = nuaa_ros_code
+	url = git@github.com:Peiyang-Aeromodelling-Association/nuaa_ros_code.git
+[submodule "inventory_management_server"]
+	path = inventory_management_server
+	url = git@github.com:Peiyang-Aeromodelling-Association/inventory_management_server.git
+[submodule "localization_framework"]
+	path = localization_framework
+	url = git@github.com:Peiyang-Aeromodelling-Association/localization_framework.git
+[submodule "decision_framework"]
+	path = decision_framework
+	url = git@github.com:Peiyang-Aeromodelling-Association/decision_framework.git
+[submodule "visual_framework"]
+	path = visual_framework
+	url = git@github.com:Peiyang-Aeromodelling-Association/visual_framework.git
