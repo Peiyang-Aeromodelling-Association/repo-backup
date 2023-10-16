@@ -63,6 +63,8 @@ git add . && git commit -am"update" && GIT_SSH_COMMAND="ssh -i $(load_key repo-b
 
 # backup
 
+echo "Backuping"
+
 tar czf "$backup_folder/backup.tar.gz" -C "$local_destination" .
 
 for ((i=max_copies; i>=1; i--)); do
