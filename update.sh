@@ -1,7 +1,8 @@
 #!/usr/bin/bash
 
-# read key_dir from 1st argument
+# read key_dir from 1st argument and local dest from 2nd arg
 key_dir=$1
+local_destination=$2
 
 # function load_key: load ssh key from key_dir via repo name, return content of the key
 function load_key {
@@ -17,9 +18,6 @@ function load_key {
 
 # Set the repository URL
 repo_url=git@github.com:Peiyang-Aeromodelling-Association/repo-backup.git
-
-# Set the local destination for the repository
-local_destination=~/Peiyang-Aeromodelling-Association
 
 # Clone the repository if it doesn't already exist (.git doesn't exist)
 if [ ! -d "$local_destination/.git" ]; then
@@ -58,5 +56,6 @@ for submodule_name in $submodule_names; do
 done
 
 # commit and push changes
+echo "Updating remote"
 git add . && git commit -am"update" && GIT_SSH_COMMAND="ssh -i $(load_key repo-backup)" git push origin main
 
