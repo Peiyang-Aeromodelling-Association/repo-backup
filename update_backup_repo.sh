@@ -63,7 +63,7 @@ git add . && git commit -am"update" && GIT_SSH_COMMAND="ssh -i $(load_key repo-b
 
 # backup
 
-tar czf "$local_destination/backup.tar.gz" -C "$local_destination" .
+tar czf "$backup_folder/backup.tar.gz" -C "$local_destination" .
 
 for ((i=max_copies; i>=1; i--)); do
     current_suffix=".$i"
@@ -77,4 +77,4 @@ for ((i=max_copies; i>=1; i--)); do
     fi
 done
 
-mv "$local_destination/backup.tar.gz" "$backup_folder/backup.1.tar.gz"
+mv "$backup_folder/backup.tar.gz" "$backup_folder/backup.1.tar.gz"
