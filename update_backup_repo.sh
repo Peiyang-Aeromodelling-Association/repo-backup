@@ -3,6 +3,8 @@
 # read key_dir from 1st argument and local dest from 2nd arg
 key_dir=$1
 local_destination=$2
+backup_folder=$3
+max_copies=$4
 
 # function load_key: load ssh key from key_dir via repo name, return content of the key
 function load_key {
@@ -27,7 +29,7 @@ fi
 # Navigate to the local repository directory
 cd $local_destination
 
-# git pull documentation-deploy
+# git pull
 GIT_SSH_COMMAND="ssh -i $(load_key repo-backup)" git pull origin main:main --force
 
 function pull_submodule {
@@ -59,3 +61,20 @@ done
 echo "Updating remote"
 git add . && git commit -am"update" && GIT_SSH_COMMAND="ssh -i $(load_key repo-backup)" git push origin main
 
+# backup
+
+tar czf "$local_destination/backup.tar.gz" -C "$local_destination" .
+
+for ((i=max_copies; i>=1; i--)); do
+    current_suffix=".$i"
+    if [ -e "$backup_folder/backup$current_suffix.tar.gz" ]; then
+        if [ "$i" -eq "$max_copies" ]; then
+            rm -f "$backup_folder/backup$current_suffix.tar.gz"
+        else
+            next_suffix=".$((i+1))"
+            mv "$backup_folder/backup$current_suffix.tar.gz" "$backup_folder/backup$next_suffix.tar.gz"
+        fi
+    fi
+done
+
+mv "$local_destination/backup.tar.gz" "$backup_folder/backup.1.tar.gz"
